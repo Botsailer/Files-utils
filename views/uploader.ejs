@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Uploader</title>
+    <style>
+        .drop-zone {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .drop-zone.highlight {
+            background-color: #f7f7f7;
+        }
+    </style>
+</head>
+<body>
+    <div class="drop-zone" id="dropZone">
+        <p>Drag and drop files here or click to select files</p>
+        <input type="file" id="fileInput" multiple>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('highlight');
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('highlight');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('highlight');
+            const files = e.dataTransfer.files;
+            fileInput.files = files;
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            // Handle file upload logic using Multer
+            // Example: You can send the files to the server using AJAX or form submission
+        });
+    </script>
+</body>
+</html>
